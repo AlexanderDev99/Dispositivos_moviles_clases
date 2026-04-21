@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Dispositivos_moviles_clases</string>
+    <string name="title_app">Registro</string>
+    <string name="subtitle_app">!Bienvenido Gamer!</string>
+    <string name="init_count_mesage">¡Regístrate para empezar tu Aventura!</string>
+    <string name="user_name">Nombre de usuario</string>
+    <string name="password_user">Ingrese su contraseña</string>
+    <string name="mail_user">Ingrese su correo</string>
+    <string name="register_true">Registrar</string>
+    <string name="google">Google</string>
+    <string name="xbox">Xbox</string>
 </resources>
