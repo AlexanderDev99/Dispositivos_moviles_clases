@@ -1,5 +1,6 @@
 package com.example.dispositivos_moviles_clases
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -19,12 +20,18 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
 
+    var counter: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         //inflamos el layout
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //variables de inicializacion
+        initVariables()
+        initListeners()
 
         //variable boton de registro
         //inflando dejamos de crear las variables
@@ -37,22 +44,33 @@ class MainActivity : AppCompatActivity() {
 //        userPassword = findViewById<TextView>(R.id.textPassword)
 
 
+    }
+
+    fun initListeners() {
+
         binding.RegisterButton.setOnClickListener {
 
             //definimos las condiciones
             var msg = ""
-            if(binding.textUserName.text.toString() == "admin" && binding.textPassword.text.toString() == "12345")
-                msg = "registro con exito!"
+            if(binding.textUserName.toString() == "admin" && binding.textPassword.toString() == "admin") {
+
+                var intent = Intent(this, Principal::class.java)
+                startActivity(intent)
+            }
             else
-                msg = "registro fallido!"
-
-
-            //toast elemento visual no modificable
+                //toast elemento visual no modificable
             Toast.makeText(
                 this, //contexto -> this, este contexto tiene que ver con ciclo de vida
-                "Hola Mundo!", // lo que vamos a mostrar
+                msg, // lo que vamos a mostrar
                 Toast.LENGTH_LONG) // tiempo de duracion en la pantalla
                 .show()
         }
     }
+
+    private fun initVariables() {
+
+        counter = 1;
+    }
+
+
 }
