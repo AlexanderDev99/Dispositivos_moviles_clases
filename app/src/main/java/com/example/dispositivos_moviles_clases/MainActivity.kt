@@ -2,8 +2,6 @@ package com.example.dispositivos_moviles_clases
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.dispositivos_moviles_clases.databinding.ActivityMainBinding
@@ -50,20 +48,35 @@ class MainActivity : AppCompatActivity() {
 
         binding.RegisterButton.setOnClickListener {
 
-            //definimos las condiciones
-            var msg = ""
-            if(binding.textUserName.toString() == "admin" && binding.textPassword.toString() == "admin") {
+//            //definimos las condiciones
+//            var msg = ""
+//            if(binding.textUserName.toString() == "admin" && binding.textPassword.toString() == "admin") {
+//
+//                var intent = Intent(this, Principal::class.java)
+//                startActivity(intent)
+//            }
+//            else
+//                //toast elemento visual no modificable
+//            Toast.makeText(
+//                this, //contexto -> this, este contexto tiene que ver con ciclo de vida
+//                msg, // lo que vamos a mostrar
+//                Toast.LENGTH_LONG) // tiempo de duracion en la pantalla
+//                .show()
 
+            Toast.makeText(this,"Hola Mundo",Toast.LENGTH_LONG).show()
+            val username = binding.textUserName.textDirection.toString()?.trim()
+            val password = binding.textPassword.textDirection?.toString()?.trim()
+            var msg = ""
+            if (username == "admin" && password == "admin") {
                 var intent = Intent(this, Principal::class.java)
+
+                intent.putExtra("xx1" , "Hola mundo")
                 startActivity(intent)
+            } else {
+
+                Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
+
             }
-            else
-                //toast elemento visual no modificable
-            Toast.makeText(
-                this, //contexto -> this, este contexto tiene que ver con ciclo de vida
-                msg, // lo que vamos a mostrar
-                Toast.LENGTH_LONG) // tiempo de duracion en la pantalla
-                .show()
         }
     }
 
@@ -71,6 +84,8 @@ class MainActivity : AppCompatActivity() {
 
         counter = 1;
     }
-
+    override fun onDestroy() {
+        super.onDestroy()
+    }
 
 }

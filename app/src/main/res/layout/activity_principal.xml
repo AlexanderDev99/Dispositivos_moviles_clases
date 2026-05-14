@@ -29,4 +29,16 @@
         android:layout_height="wrap_content"
         android:layout_margin="18dp"
         android:text="Abrir url"/>
+
+    <Spinner
+        android:id="@+id/spinnerURLs"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/logoutBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="9dp"
+        android:text="Cerrar Sesion"/>
 </LinearLayout>
