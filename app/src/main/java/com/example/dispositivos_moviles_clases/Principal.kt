@@ -1,21 +1,19 @@
 package com.example.dispositivos_moviles_clases
 
-import android.R
-import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.view.ViewParent
-import android.widget.Adapter
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.dispositivos_moviles_clases.adapters.CustomAdapter
 import com.example.dispositivos_moviles_clases.databinding.ActivityPrincipalBinding
+import com.example.dispositivos_moviles_clases.dto.Empresas
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 
@@ -54,6 +52,36 @@ class Principal : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             adapter = myAdapter
             onItemSelectedListener = this@Principal
         }
+
+        //RECYCLER VIEW
+
+        var optionsEmpresas = listOf<Empresas>(
+            Empresas("Youtube",
+                "https://www.nintendo.com/eu/media/images/10_share_images/games_15/nintendo_switch_download_software_1/H2x1_NSwitchDS_YouTube_image1600w.jpg"),
+            Empresas("Google",
+                "https://yt3.googleusercontent.com/bAseQlKvNmjdLQrvYWm_q3QDp8C8YKyYI-nYJewgOkPi0JU1_3X9oFgjrEdzkOlXzLGFxFbnsw=s900-c-k-c0x00ffffff-no-rj"),
+            Empresas("Facebook",
+                "https://cdn-1.webcatalog.io/catalog/facebook/facebook-social-preview.png?v=1776040668231"),
+            Empresas("Apple",
+                "https://storage.googleapis.com/webdesignledger.pub.network/WDL/maxresdefault.jpg")
+        )
+
+
+        var adapterRecyclerView = CustomAdapter(optionsEmpresas)
+        binding.RvUrls.adapter = adapterRecyclerView
+
+// FORMA 1
+//        binding.RvUrls.layoutManager = LinearLayoutManager(
+//            this,
+//            RecyclerView.HORIZONTAL,
+//            false //va de 1 al 5, si quiero alreves usamos true
+//        )
+
+        //FORMA 2
+        binding.RvUrls.layoutManager = GridLayoutManager(
+            this, 2
+        )
+
     }
 
     override fun onDestroy() {
@@ -66,7 +94,6 @@ class Principal : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
 
             //CREACION DE LA URI
-
 
           /*
             //creamos el action view
@@ -114,12 +141,7 @@ class Principal : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         }
     }
 
-    override fun onItemSelected(
-        p0: AdapterView<*>?,
-        p1: View?,
-        p2: Int,
-        p3: Long
-    ) {
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         Toast.makeText(this, "Posicion seleccionada es ${position}", Toast.LENGTH_LONG)
             .show()
     }
