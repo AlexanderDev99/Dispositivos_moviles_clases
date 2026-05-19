@@ -1,5 +1,7 @@
 package com.example.dispositivos_moviles_clases
 
+import android.annotation.SuppressLint
+import android.app.SearchManager
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -19,6 +21,9 @@ import com.google.android.material.snackbar.Snackbar
 
 class Principal : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     private  lateinit var binding: ActivityPrincipalBinding
+    var adapterRecyclerView = CustomAdapter(
+        {getName(it)},
+        {deleteEmpresas(it)})
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,18 +62,22 @@ class Principal : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
         var optionsEmpresas = listOf<Empresas>(
             Empresas("Youtube",
-                "https://www.nintendo.com/eu/media/images/10_share_images/games_15/nintendo_switch_download_software_1/H2x1_NSwitchDS_YouTube_image1600w.jpg"),
+                "https://www.nintendo.com/eu/media/images/10_share_images/games_15/nintendo_switch_download_software_1/H2x1_NSwitchDS_YouTube_image1600w.jpg",
+                "https://www.youtube.com/"),
             Empresas("Google",
-                "https://yt3.googleusercontent.com/bAseQlKvNmjdLQrvYWm_q3QDp8C8YKyYI-nYJewgOkPi0JU1_3X9oFgjrEdzkOlXzLGFxFbnsw=s900-c-k-c0x00ffffff-no-rj"),
+                "https://yt3.googleusercontent.com/bAseQlKvNmjdLQrvYWm_q3QDp8C8YKyYI-nYJewgOkPi0JU1_3X9oFgjrEdzkOlXzLGFxFbnsw=s900-c-k-c0x00ffffff-no-rj",
+                "https://google.com.ec"),
             Empresas("Facebook",
-                "https://cdn-1.webcatalog.io/catalog/facebook/facebook-social-preview.png?v=1776040668231"),
+                "https://cdn-1.webcatalog.io/catalog/facebook/facebook-social-preview.png?v=1776040668231",
+                "https://www.facebook.com/"),
             Empresas("Apple",
-                "https://storage.googleapis.com/webdesignledger.pub.network/WDL/maxresdefault.jpg")
+                "https://storage.googleapis.com/webdesignledger.pub.network/WDL/maxresdefault.jpg",
+                "https://www.apple.com/")
         )
 
-
-        var adapterRecyclerView = CustomAdapter(optionsEmpresas)
         binding.RvUrls.adapter = adapterRecyclerView
+        //NOTA: //en kotlin los parametros normales van dentro del parentesis de las variables
+        // pero si es una funcion el parametro, va por fuera
 
 // FORMA 1
 //        binding.RvUrls.layoutManager = LinearLayoutManager(
@@ -82,10 +91,37 @@ class Principal : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             this, 2
         )
 
+        //Carga denuevo si hay cambios
+        adapterRecyclerView.lista = optionsEmpresas as MutableList<Empresas>
+        adapterRecyclerView.notifyDataSetChanged()
+
     }
 
     override fun onDestroy() {
         super.onDestroy()
+    }
+
+    //impresion del nombre de la empresa
+    fun getName(emp: Empresas){
+        //obteniendo el nombre de la empresa para mostrar en un snackbar
+//        Snackbar.make(binding.RvUrls,
+//            Emp.name,
+//            Snackbar.LENGTH_LONG)
+//            .show()
+        //abriendo la url de la empresa
+//        val intent = Intent(Intent.ACTION_VIEW)
+//        intent.setData(Uri.parse(emp.url))
+//        startActivity(intent)
+        //buscando la empresa en el navegador
+        val intent2 = Intent(Intent.ACTION_WEB_SEARCH)
+        intent.putExtra(SearchManager.QUERY, emp.name)
+        startActivity(intent2)
+    }
+
+    fun deleteEmpresas(emp: Empresas){
+        var newEmpresas = adapterRecyclerView.lista.minus(emp)
+        adapterRecyclerView.lista = newEmpresas as MutableList<Empresas>
+        adapterRecyclerView.notifyDataSetChanged()
     }
 
     private  fun initListeners() {
