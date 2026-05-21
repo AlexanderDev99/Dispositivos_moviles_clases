@@ -1,6 +1,6 @@
 package com.example.dispositivos_moviles_clases
 
-import android.annotation.SuppressLint
+
 import android.app.SearchManager
 import android.content.Intent
 import android.net.Uri
@@ -11,8 +11,6 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.dispositivos_moviles_clases.adapters.CustomAdapter
 import com.example.dispositivos_moviles_clases.databinding.ActivityPrincipalBinding
 import com.example.dispositivos_moviles_clases.dto.Empresas
@@ -148,6 +146,7 @@ class Principal : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             startActivity(mapIntent)
         }
 
+        //EVENTO CERRAR SESION APLICADO AL BOTON CERRAR SESION
         binding.logoutBtn.setOnClickListener {
 
             //Alert dialog
@@ -174,6 +173,51 @@ class Principal : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             //cerramos sesion cambiando de pantalla
 //            val intent = Intent(this, MainActivity::class.java)
 //            startActivity(intent)
+        }
+
+        //MENU BAR
+        binding.bottomNavigationView.setOnItemSelectedListener { item ->
+            when(item.itemId){
+
+                //manejamos las acciones de cada item del muenu bar
+                R.id.mn_home -> {
+                    Snackbar.make(binding.RvUrls,
+                        item.title.toString(),
+                        Snackbar.LENGTH_LONG
+                    )
+                        .show()
+                    true
+                }
+                R.id.mn_samples -> {true}
+                R.id.mn_explorar -> {true}
+                R.id.mn_biblio -> {
+                    //EVENTO CERRAR CESION APLICADO AL BOTON DEL MENU BAR
+                    //Alert dialog
+                    val dialog = MaterialAlertDialogBuilder(this)
+                        .setTitle("Cerrar sesion")
+                        .setMessage("¿Esta usted seguro de cerrar sesion?")
+                        .setCancelable(true)
+                        //caso si desea,os cerrar sesion
+                        .setPositiveButton("Si"){
+                                dialog, id ->
+                            val intent = Intent(this, MainActivity::class.java)
+                            startActivity(intent)
+                        }
+                        // caso no desea cerrar sesion
+                        .setNegativeButton("No"){
+                                dialog, id -> dialog.cancel()
+                        }
+                        // caso si desea cancelar
+                        .setNeutralButton("Cancelar"){
+                                dialog, id -> dialog.dismiss()
+                        }
+                        .show()
+
+                    true}
+
+                //si no se selecciona cualquiera de las anteriores no se hace nada
+                else -> false
+            }
         }
     }
 

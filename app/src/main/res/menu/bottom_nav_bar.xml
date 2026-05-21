@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/mn_home"
+        android:title="Inicio"
+        android:icon="@drawable/ic_home_24"
+        />
+
+    <item
+        android:id="@+id/mn_samples"
+        android:title="Samples"
+        android:icon="@drawable/outline_add_link_24"/>
+    <item
+        android:id="@+id/mn_explorar"
+        android:title="Explorar"
+        android:icon="@drawable/outline_add_photo_alternate_24"/>
+    <item
+        android:id="@+id/mn_biblio"
+        android:title="Biblioteca"
+        android:icon="@drawable/outline_arrow_menu_close_24"/>
+</menu>
