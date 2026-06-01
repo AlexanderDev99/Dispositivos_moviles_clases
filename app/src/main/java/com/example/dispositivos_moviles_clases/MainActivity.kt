@@ -6,82 +6,47 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.dispositivos_moviles_clases.databinding.ActivityMainBinding
 
+/**
+ * Actividad inicial que funciona como pantalla de Login.
+ */
 class MainActivity : AppCompatActivity() {
 
-    //variables peresosas
-    //con inflar el layout dejamos de usar este metodo
-//    lateinit var button: Button
-//    lateinit var userName : TextView
-//    lateinit var userEmail : TextView
-//    lateinit var userPassword : TextView
     private lateinit var binding: ActivityMainBinding
-
-    var counter: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        //inflamos el layout
+        // Inicialización de ViewBinding
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        //variables de inicializacion
-        initVariables()
+        
+        // Configuración de los eventos de click
         initListeners()
-
-        //variable boton de registro
-        //inflando dejamos de crear las variables
-        //var button = findViewById<Button>(R.id.RegisterButton)
-
-        //variable entradas del formulario
-        //inflando dejamos de crear las variables
-//        userName = findViewById<TextView>(R.id.textUserName)
-//        userEmail = findViewById<TextView>(R.id.textEmail)
-//        userPassword = findViewById<TextView>(R.id.textPassword)
     }
 
     private fun initListeners() {
+        // Listener para el botón de inicio de sesión
         binding.LoginButton.setOnClickListener {
-
-            //definimos las condiciones
-//            var msg = ""
-//            if(binding.textUserName.toString() == "admin" && binding.textPassword.toString() == "admin") {
-//
-//                var intent = Intent(this, Principal::class.java)
-//                startActivity(intent)
-//            }
-//            else
-//                //toast elemento visual no modificable
-//            Toast.makeText(
-//                this, //contexto -> this, este contexto tiene que ver con ciclo de vida
-//                msg, // lo que vamos a mostrar
-//                Toast.LENGTH_LONG) // tiempo de duracion en la pantalla
-//                .show()
-
+            // Obtenemos el texto de los campos de entrada
             val email = binding.textEmail.editText?.text.toString().trim()
             val password = binding.textPassword.editText?.text.toString().trim()
 
+            // Validación simple de credenciales (quemadas para ejemplo)
             if (email == "admin@admin.com" && password == "admin") {
-                val intent = Intent(this, Principal::class.java)
+                // Si es correcto, navegamos a MenuActivity (la pantalla con Fragments)
+                val intent = Intent(this, MenuActivity::class.java)
                 intent.putExtra("user_email", email)
                 startActivity(intent)
-                finish() // Opcional: cerrar la pantalla de login para que no se regrese con "atrás"
+                finish() // Cerramos la pantalla de login para que no se pueda volver atrás con el botón físico
             } else {
+                // Si es incorrecto, mostramos un mensaje de error
                 Toast.makeText(this, "Credenciales incorrectas", Toast.LENGTH_LONG).show()
             }
         }
 
+        // Listener para el texto de "No tienes cuenta"
         binding.textViewNoAccount.setOnClickListener {
-            // Aquí se navegaría a la actividad de Registro cuando esté implementada
+            // Por ahora solo muestra un mensaje informativo
             Toast.makeText(this, "Navegar a Registro", Toast.LENGTH_SHORT).show()
         }
-    }
-
-    private fun initVariables() {
-
-        counter = 1;
-    }
-    override fun onDestroy() {
-        super.onDestroy()
     }
 }
