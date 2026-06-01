@@ -2,7 +2,8 @@ package com.example.dispositivos_moviles_clases
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.example.dispositivos_moviles_clases.databinding.ActivityMenuBinding
 
 /**
@@ -20,47 +21,20 @@ class MenuActivity : AppCompatActivity() {
         binding = ActivityMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Cargamos el fragmento inicial (HomeFragment) solo la primera vez que se crea la actividad
-        if (savedInstanceState == null) {
-            replaceFragment(HomeFragment())
-        }
-
-        // Configuramos el listener para detectar clicks en los elementos del Navigation Rail
-        binding.navigationRail.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.mn_home -> {
-                    // Si se pulsa Inicio, reemplazamos el contenido por HomeFragment
-                    replaceFragment(HomeFragment())
-                    true
-                }
-                R.id.mn_samples -> {
-                    // Si se pulsa Samples, reemplazamos el contenido por SamplesFragment
-                    replaceFragment(SamplesFragment())
-                    true
-                }
-                R.id.mn_explorar -> {
-                    // Si se pulsa Explorar, reemplazamos el contenido por ExploreFragment
-                    replaceFragment(ExploreFragment())
-                    true
-                }
-                R.id.mn_biblio -> {
-                    // Si se pulsa Biblioteca, reemplazamos el contenido por LibraryFragment
-                    replaceFragment(LibraryFragment())
-                    true
-                }
-                else -> false
-            }
-        }
+        initListeners()
     }
 
     /**
-     * Función auxiliar para realizar la transacción de reemplazo de fragmentos.
-     * @param fragment El nuevo fragmento que se desea mostrar.
+     * Configura los listeners de los componentes de la interfaz.
      */
-    private fun replaceFragment(fragment: Fragment) {
-        // Usamos supportFragmentManager para gestionar el cambio de fragmentos
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, fragment) // Reemplaza el contenido del FrameLayout
-            .commit() // Aplica los cambios
+    private fun initListeners() {
+        // Obtenemos el NavHostFragment que contiene el NavController
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.fragmentContainer) as NavHostFragment
+        val navController = navHostFragment.navController
+
+        // Vinculamos el NavigationRailView con el NavController
+        // Esto gestiona automáticamente el cambio de fragmentos basado en los IDs del menú y el NavGraph
+        binding.navigationRail.setupWithNavController(navController)
     }
 }

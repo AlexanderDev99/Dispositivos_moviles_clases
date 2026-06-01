@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mn_home">
+
+    <fragment
+        android:id="@+id/mn_home"
+        android:name="com.example.dispositivos_moviles_clases.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_mn_home_to_mn_samples"
+            app:destination="@id/mn_samples" />
+    </fragment>
+    <fragment
+        android:id="@+id/mn_samples"
+        android:name="com.example.dispositivos_moviles_clases.SamplesFragment"
+        android:label="fragment_samples"
+        tools:layout="@layout/fragment_samples" >
+        <action
+            android:id="@+id/action_mn_samples_to_mn_explorar"
+            app:destination="@id/mn_explorar" />
+    </fragment>
+    <fragment
+        android:id="@+id/mn_explorar"
+        android:name="com.example.dispositivos_moviles_clases.ExploreFragment"
+        android:label="fragment_explore"
+        tools:layout="@layout/fragment_explore" >
+        <action
+            android:id="@+id/action_mn_explorar_to_mn_biblio"
+            app:destination="@id/mn_biblio" />
+    </fragment>
+    <fragment
+        android:id="@+id/mn_biblio"
+        android:name="com.example.dispositivos_moviles_clases.LibraryFragment"
+        android:label="fragment_library"
+        tools:layout="@layout/fragment_library" >
+        <action
+            android:id="@+id/action_mn_biblio_to_mn_home"
+            app:destination="@id/mn_home" />
+    </fragment>
+</navigation>

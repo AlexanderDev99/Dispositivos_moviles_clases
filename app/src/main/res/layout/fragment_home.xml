@@ -4,11 +4,25 @@
     android:layout_height="match_parent"
     android:background="#673AB7">
 
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Fragmento de Inicio"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fragmento de Inicio"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnGoToSamples"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Ir a Samples" />
+    </LinearLayout>
 </FrameLayout>
