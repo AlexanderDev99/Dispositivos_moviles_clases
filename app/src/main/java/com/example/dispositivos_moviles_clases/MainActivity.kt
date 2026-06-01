@@ -6,7 +6,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.dispositivos_moviles_clases.databinding.ActivityMainBinding
 
-
 class MainActivity : AppCompatActivity() {
 
     //variables peresosas
@@ -15,8 +14,7 @@ class MainActivity : AppCompatActivity() {
 //    lateinit var userName : TextView
 //    lateinit var userEmail : TextView
 //    lateinit var userPassword : TextView
-
-    lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
 
     var counter: Int = 0
 
@@ -40,15 +38,12 @@ class MainActivity : AppCompatActivity() {
 //        userName = findViewById<TextView>(R.id.textUserName)
 //        userEmail = findViewById<TextView>(R.id.textEmail)
 //        userPassword = findViewById<TextView>(R.id.textPassword)
-
-
     }
 
-    fun initListeners() {
+    private fun initListeners() {
+        binding.LoginButton.setOnClickListener {
 
-        binding.RegisterButton.setOnClickListener {
-
-//            //definimos las condiciones
+            //definimos las condiciones
 //            var msg = ""
 //            if(binding.textUserName.toString() == "admin" && binding.textPassword.toString() == "admin") {
 //
@@ -63,20 +58,22 @@ class MainActivity : AppCompatActivity() {
 //                Toast.LENGTH_LONG) // tiempo de duracion en la pantalla
 //                .show()
 
-            Toast.makeText(this,"Hola Mundo",Toast.LENGTH_LONG).show()
-            val username = binding.textUserName.textDirection.toString()?.trim()
-            val password = binding.textPassword.textDirection?.toString()?.trim()
-            var msg = ""
-            if (username == "admin" && password == "admin") {
-                var intent = Intent(this, Principal::class.java)
+            val email = binding.textEmail.editText?.text.toString().trim()
+            val password = binding.textPassword.editText?.text.toString().trim()
 
-                intent.putExtra("xx1" , "Hola mundo")
+            if (email == "admin@admin.com" && password == "admin") {
+                val intent = Intent(this, Principal::class.java)
+                intent.putExtra("user_email", email)
                 startActivity(intent)
+                finish() // Opcional: cerrar la pantalla de login para que no se regrese con "atrás"
             } else {
-
-                Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
-
+                Toast.makeText(this, "Credenciales incorrectas", Toast.LENGTH_LONG).show()
             }
+        }
+
+        binding.textViewNoAccount.setOnClickListener {
+            // Aquí se navegaría a la actividad de Registro cuando esté implementada
+            Toast.makeText(this, "Navegar a Registro", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -87,5 +84,4 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
     }
-
 }
