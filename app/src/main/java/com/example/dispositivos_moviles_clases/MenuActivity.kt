@@ -21,13 +21,21 @@ class MenuActivity : AppCompatActivity() {
         binding = ActivityMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         initListeners()
+        initNavigation()
     }
 
     /**
      * Configura los listeners de los componentes de la interfaz.
      */
     private fun initListeners() {
+
+    }
+
+
+    //Controlamos la nevegacion de los fragment
+    private fun initNavigation(){
         // Obtenemos el NavHostFragment que contiene el NavController
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.fragmentContainer) as NavHostFragment

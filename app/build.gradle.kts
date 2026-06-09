@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -52,4 +53,7 @@ dependencies {
     implementation("com.squareup.picasso:picasso:2.8")
     implementation(libs.navigation.ui)
     implementation(libs.navigation.fragment)
+
+    implementation(platform("com.google.firebase:firebase-bom:34.14.0"))
+    implementation("com.firebaseui:firebase-ui-auth:9.0.0")
 }

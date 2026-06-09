@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "152697568883",
+    "project_id": "dispomobiles-1d0fe",
+    "storage_bucket": "dispomobiles-1d0fe.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:152697568883:android:6041c40d8e99884b083406",
+        "android_client_info": {
+          "package_name": "com.example.dispositivos_moviles_clases"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD00SGADmahgbo3yguS3nyEXzk41dfCC7U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
