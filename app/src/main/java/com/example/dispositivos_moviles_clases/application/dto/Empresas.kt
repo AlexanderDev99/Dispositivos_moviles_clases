@@ -1,4 +1,4 @@
-package com.example.dispositivos_moviles_clases.dto
+package com.example.dispositivos_moviles_clases.application.dto
 
 class Empresas (
     val name : String,

@@ -56,4 +56,8 @@ dependencies {
 
     implementation(platform("com.google.firebase:firebase-bom:34.14.0"))
     implementation("com.firebaseui:firebase-ui-auth:9.0.0")
+
+    // Declare the dependency for the Cloud Firestore library
+    implementation("com.google.firebase:firebase-firestore")
+
 }

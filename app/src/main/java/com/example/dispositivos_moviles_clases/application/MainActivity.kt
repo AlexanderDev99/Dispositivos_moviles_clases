@@ -1,4 +1,4 @@
-package com.example.dispositivos_moviles_clases
+package com.example.dispositivos_moviles_clases.application
 
 import android.content.Intent
 import android.os.Bundle

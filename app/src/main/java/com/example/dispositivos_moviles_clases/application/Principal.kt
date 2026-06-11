@@ -1,6 +1,7 @@
-package com.example.dispositivos_moviles_clases
+package com.example.dispositivos_moviles_clases.application
 
 
+import android.R
 import android.app.SearchManager
 import android.content.Intent
 import android.net.Uri
@@ -11,17 +12,17 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.dispositivos_moviles_clases.adapters.CustomAdapter
+import com.example.dispositivos_moviles_clases.application.adapters.CustomAdapter
+import com.example.dispositivos_moviles_clases.application.dto.Empresas
 import com.example.dispositivos_moviles_clases.databinding.ActivityPrincipalBinding
-import com.example.dispositivos_moviles_clases.dto.Empresas
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 
 class Principal : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     private  lateinit var binding: ActivityPrincipalBinding
     var adapterRecyclerView = CustomAdapter(
-        {getName(it)},
-        {deleteEmpresas(it)})
+        { getName(it) },
+        { deleteEmpresas(it) })
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +48,7 @@ class Principal : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         //SPINNER
         var options = listOf("YouTube", "Google", "Facebook", "Apple")
         var myAdapter = ArrayAdapter(this,
-            android.R.layout.simple_spinner_item,
+            R.layout.simple_spinner_item,
             // R es una clase estatica que me permite acceder a todos los recursos de mi proyecto
             options)
 
@@ -59,18 +60,26 @@ class Principal : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         //RECYCLER VIEW
 
         var optionsEmpresas = listOf<Empresas>(
-            Empresas("Youtube",
+            Empresas(
+                "Youtube",
                 "https://www.nintendo.com/eu/media/images/10_share_images/games_15/nintendo_switch_download_software_1/H2x1_NSwitchDS_YouTube_image1600w.jpg",
-                "https://www.youtube.com/"),
-            Empresas("Google",
+                "https://www.youtube.com/"
+            ),
+            Empresas(
+                "Google",
                 "https://yt3.googleusercontent.com/bAseQlKvNmjdLQrvYWm_q3QDp8C8YKyYI-nYJewgOkPi0JU1_3X9oFgjrEdzkOlXzLGFxFbnsw=s900-c-k-c0x00ffffff-no-rj",
-                "https://google.com.ec"),
-            Empresas("Facebook",
+                "https://google.com.ec"
+            ),
+            Empresas(
+                "Facebook",
                 "https://cdn-1.webcatalog.io/catalog/facebook/facebook-social-preview.png?v=1776040668231",
-                "https://www.facebook.com/"),
-            Empresas("Apple",
+                "https://www.facebook.com/"
+            ),
+            Empresas(
+                "Apple",
                 "https://storage.googleapis.com/webdesignledger.pub.network/WDL/maxresdefault.jpg",
-                "https://www.apple.com/")
+                "https://www.apple.com/"
+            )
         )
 
         binding.RvUrls.adapter = adapterRecyclerView
@@ -180,7 +189,7 @@ class Principal : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             when(item.itemId){
 
                 //manejamos las acciones de cada item del muenu bar
-                R.id.mn_home -> {
+                com.example.dispositivos_moviles_clases.R.id.mn_home -> {
                     Snackbar.make(binding.RvUrls,
                         item.title.toString(),
                         Snackbar.LENGTH_LONG
@@ -188,9 +197,9 @@ class Principal : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                         .show()
                     true
                 }
-                R.id.mn_samples -> {true}
-                R.id.mn_explorar -> {true}
-                R.id.mn_biblio -> {
+                com.example.dispositivos_moviles_clases.R.id.mn_samples -> {true}
+                com.example.dispositivos_moviles_clases.R.id.mn_explorar -> {true}
+                com.example.dispositivos_moviles_clases.R.id.mn_biblio -> {
                     //EVENTO CERRAR CESION APLICADO AL BOTON DEL MENU BAR
                     //Alert dialog
                     val dialog = MaterialAlertDialogBuilder(this)

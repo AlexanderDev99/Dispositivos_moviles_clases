@@ -1,4 +1,4 @@
-package com.example.dispositivos_moviles_clases
+package com.example.dispositivos_moviles_clases.application
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
+import com.example.dispositivos_moviles_clases.R
 
 class SamplesFragment : Fragment() {
     override fun onCreateView(

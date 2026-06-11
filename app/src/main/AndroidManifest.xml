@@ -15,17 +15,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Dispositivos_moviles_clases">
         <activity
-            android:name=".Principal"
+            android:name=".application.Principal"
             android:exported="true" >
 
         </activity>
 
         <activity
-            android:name=".MenuActivity"
+            android:name=".application.MenuActivity"
             android:exported="false" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".application.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

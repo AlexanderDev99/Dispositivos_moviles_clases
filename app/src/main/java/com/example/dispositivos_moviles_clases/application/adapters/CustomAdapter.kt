@@ -1,15 +1,13 @@
-package com.example.dispositivos_moviles_clases.adapters
+package com.example.dispositivos_moviles_clases.application.adapters
 
-import android.R.attr.onClick
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dispositivos_moviles_clases.R
+import com.example.dispositivos_moviles_clases.application.dto.Empresas
 import com.example.dispositivos_moviles_clases.databinding.MySpinnerLayoutBinding
-import com.example.dispositivos_moviles_clases.dto.Empresas
 import com.squareup.picasso.Picasso
-import java.util.Collections.emptyList
 
 //funcion de orden superor por que acepta parametros y funciones
 class CustomAdapter(var OnClick: (Empresas) -> Unit,
