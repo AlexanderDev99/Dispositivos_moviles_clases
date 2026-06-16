@@ -1,4 +1,4 @@
-package com.example.dispositivos_moviles_clases.application
+package com.example.dispositivos_moviles_clases.application.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

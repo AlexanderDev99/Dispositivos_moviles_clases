@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.dispositivos_moviles_clases.application.activities.MainActivity
 import com.example.dispositivos_moviles_clases.application.adapters.CustomAdapter
 import com.example.dispositivos_moviles_clases.application.dto.Empresas
 import com.example.dispositivos_moviles_clases.databinding.ActivityPrincipalBinding

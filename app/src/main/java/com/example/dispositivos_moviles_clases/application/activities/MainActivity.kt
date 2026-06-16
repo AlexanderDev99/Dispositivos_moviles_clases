@@ -1,4 +1,4 @@
-package com.example.dispositivos_moviles_clases.application
+package com.example.dispositivos_moviles_clases.application.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
             val password = binding.textPassword.editText?.text.toString().trim()
 
             // Validación simple de credenciales (quemadas para ejemplo)
-            if (email == "admin@admin.com" && password == "admin") {
+            if (email == "admin" && password == "admin") {
                 // Si es correcto, navegamos a MenuActivity (la pantalla con Fragments)
                 val intent = Intent(this, MenuActivity::class.java)
                 intent.putExtra("user_email", email)

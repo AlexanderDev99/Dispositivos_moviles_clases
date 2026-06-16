@@ -54,10 +54,18 @@ dependencies {
     implementation(libs.navigation.ui)
     implementation(libs.navigation.fragment)
 
+    //Firebase
     implementation(platform("com.google.firebase:firebase-bom:34.14.0"))
     implementation("com.firebaseui:firebase-ui-auth:9.0.0")
 
     // Declare the dependency for the Cloud Firestore library
     implementation("com.google.firebase:firebase-firestore")
+
+    //View Model
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.10.0")
+    implementation("androidx.fragment:fragment-ktx:1.8.9")
+
+    //lifedata
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.10.0")
 
 }
