@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.dispositivos_moviles_clases.data.remote.dto.UserDtoRemote
+import com.example.dispositivos_moviles_clases.logic.usercases.GetAllUsersUC
 import com.example.dispositivos_moviles_clases.logic.usercases.SaveUserUC
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.Firebase
@@ -25,6 +26,11 @@ class HomeViewModel : ViewModel() {
 
     private var counterJob: Job? = null
 
+    //variables para lista de usuarios
+    val listaUsuarios : LiveData<List<UserDtoRemote>>
+        get() = _listaUsuarios
+    private var _listaUsuarios = MutableLiveData<List<UserDtoRemote>>()
+
     fun Contador() {
         // Cancelar el trabajo anterior si existe para evitar que se solapen múltiples contadores
         counterJob?.cancel()
@@ -40,18 +46,29 @@ class HomeViewModel : ViewModel() {
         }
     }
 
-    fun guardarUsuario( user: UserDtoRemote, db: FirebaseFirestore, saveUserUC: SaveUserUC) {
+    fun guardarUsuario( user: UserDtoRemote, saveUserUC: SaveUserUC) {
         // 3. Guardamos en Firebase
             viewModelScope.launch(Dispatchers.Main) {
-                val usnew = saveUserUC.saveUser(user, db)
+                val usnew = saveUserUC.invoke(user)
                 val usr = usnew.getOrNull()
                 if(usnew.getOrNull() != null){
                     _userRemote.value = usr
                 }else
                     (UserDtoRemote("","",""))
 
-
             }
+    }
+
+    fun listarUsuarios(getAllUsersUC: GetAllUsersUC){
+        viewModelScope.launch {
+            val usuarios = getAllUsersUC.invoke().getOrNull()
+
+            if(usuarios != null){
+                _listaUsuarios.value = usuarios
+            }else{
+                _listaUsuarios.value = listOf()
+            }
+        }
     }
 
 

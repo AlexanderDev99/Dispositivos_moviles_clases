@@ -1,6 +1,7 @@
 package com.example.dispositivos_moviles_clases.application.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,10 @@ import androidx.lifecycle.lifecycleScope
 import com.example.dispositivos_moviles_clases.application.viewmodels.HomeViewModel
 import com.example.dispositivos_moviles_clases.data.remote.dto.UserDtoRemote
 import com.example.dispositivos_moviles_clases.databinding.FragmentHomeBinding
+import com.example.dispositivos_moviles_clases.logic.usercases.GetAllUsersUC
 import com.example.dispositivos_moviles_clases.logic.usercases.SaveUserUC
+import com.example.dispositivos_moviles_clases.repositories.connections.UserRepository
+import com.example.dispositivos_moviles_clases.repositories.connections.remote.UserRemoteImpl
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
@@ -50,7 +54,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun initListeners(){
+    private fun initListeners() {
         binding.btnRegresar.setOnClickListener {
 
             // 1. Iniciamos el contador en el ViewModel
@@ -58,24 +62,38 @@ class HomeFragment : Fragment() {
 
             // 2. Preparamos los datos del usuario
             val user = UserDtoRemote(
-                id = "",
+                id = "111",
                 name = binding.nameUser.text.toString(),
                 lastname = binding.lastnameUser.text.toString()
             )
 
-
-            lifecycleScope.launch (Dispatchers.Main){
-                homeVM.guardarUsuario(user, db, SaveUserUC())
+//Guardar Usuarios
+//            lifecycleScope.launch (Dispatchers.Main){
+//                homeVM.guardarUsuario(
+//                    user,
+//                    SaveUserUC(
+//                        UserRepository(
+//                            UserRemoteImpl(db)
+//                        )
+//                    )
+//                )
+//            }
+            lifecycleScope.launch {
+                homeVM.listarUsuarios(
+                    GetAllUsersUC(
+                        UserRepository(
+                            UserRemoteImpl(db)
+                        )
+                    )
+                )
             }
-
-
         }
     }
 
 
     private fun initObservers() {
 
-        homeVM.userRemote.observe(viewLifecycleOwner){
+        homeVM.userRemote.observe(viewLifecycleOwner) {
             Snackbar.make(
                 binding.nameUser,
                 it?.name + "Registrado correctamente",
@@ -83,8 +101,16 @@ class HomeFragment : Fragment() {
             ).show()
         }
 
+        homeVM.listaUsuarios.observe(viewLifecycleOwner) { users ->
+           Log.d("TAG", "Listando Usuarios")
+            users.forEach {
+                Log.d("TAG", it.toString())
+            }
+        }
+
     }
-    private fun initVariables(){
+
+    private fun initVariables() {
         db = Firebase.firestore
     }
 }
