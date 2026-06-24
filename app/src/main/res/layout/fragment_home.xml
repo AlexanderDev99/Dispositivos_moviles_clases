@@ -53,6 +53,15 @@
             android:gravity="center"
             android:text="Guardar" />
 
+
+        <Button
+            android:id="@+id/btnAPI"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="Recuperar Usuarios" />
+
         <TextView
             android:id="@+id/contadorTxt"
             android:layout_width="match_parent"

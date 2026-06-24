@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.dispositivos_moviles_clases.data.remote.dto.UserDtoRemote
+import com.example.dispositivos_moviles_clases.data.remote.dto.users.TypicodeUsersDtoItem
+import com.example.dispositivos_moviles_clases.logic.usercases.GetAllUsersFromTypi
 import com.example.dispositivos_moviles_clases.logic.usercases.GetAllUsersUC
 import com.example.dispositivos_moviles_clases.logic.usercases.SaveUserUC
 import com.google.android.material.snackbar.Snackbar
@@ -31,6 +33,12 @@ class HomeViewModel : ViewModel() {
         get() = _listaUsuarios
     private var _listaUsuarios = MutableLiveData<List<UserDtoRemote>>()
 
+
+    //variables para lista de usuarios de typi
+    val typiUsers
+        get() = _typiUsers
+    private var _typiUsers = MutableLiveData<List<TypicodeUsersDtoItem>?>()
+
     fun Contador() {
         // Cancelar el trabajo anterior si existe para evitar que se solapen múltiples contadores
         counterJob?.cancel()
@@ -54,7 +62,7 @@ class HomeViewModel : ViewModel() {
                 if(usnew.getOrNull() != null){
                     _userRemote.value = usr
                 }else
-                    (UserDtoRemote("","",""))
+                    (UserDtoRemote("","Usuario no registrado",""))
 
             }
     }
@@ -70,6 +78,14 @@ class HomeViewModel : ViewModel() {
             }
         }
     }
+
+    fun getUsersTypi() {
+        viewModelScope.launch {
+            _typiUsers.value = GetAllUsersFromTypi().invoke()
+
+        }
+    }
+
 
 
 }

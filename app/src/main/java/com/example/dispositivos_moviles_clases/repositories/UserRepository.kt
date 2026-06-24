@@ -1,8 +1,7 @@
-package com.example.dispositivos_moviles_clases.repositories.connections
+package com.example.dispositivos_moviles_clases.repositories
 
 import com.example.dispositivos_moviles_clases.data.remote.dto.UserDtoRemote
 import com.example.dispositivos_moviles_clases.repositories.connections.remote.UserRemote
-import com.example.dispositivos_moviles_clases.repositories.connections.remote.UserRemoteImpl
 
 class UserRepository (val userRemoteImpl: UserRemote) {
 

@@ -11,15 +11,12 @@ import androidx.lifecycle.lifecycleScope
 import com.example.dispositivos_moviles_clases.application.viewmodels.HomeViewModel
 import com.example.dispositivos_moviles_clases.data.remote.dto.UserDtoRemote
 import com.example.dispositivos_moviles_clases.databinding.FragmentHomeBinding
-import com.example.dispositivos_moviles_clases.logic.usercases.GetAllUsersUC
-import com.example.dispositivos_moviles_clases.logic.usercases.SaveUserUC
-import com.example.dispositivos_moviles_clases.repositories.connections.UserRepository
-import com.example.dispositivos_moviles_clases.repositories.connections.remote.UserRemoteImpl
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * Fragmento que representa la pantalla de Inicio.
@@ -56,7 +53,6 @@ class HomeFragment : Fragment() {
 
     private fun initListeners() {
         binding.btnRegresar.setOnClickListener {
-
             // 1. Iniciamos el contador en el ViewModel
             homeVM.Contador()
 
@@ -66,32 +62,23 @@ class HomeFragment : Fragment() {
                 name = binding.nameUser.text.toString(),
                 lastname = binding.lastnameUser.text.toString()
             )
+        }
 
-//Guardar Usuarios
-//            lifecycleScope.launch (Dispatchers.Main){
-//                homeVM.guardarUsuario(
-//                    user,
-//                    SaveUserUC(
-//                        UserRepository(
-//                            UserRemoteImpl(db)
-//                        )
-//                    )
-//                )
-//            }
-            lifecycleScope.launch {
-                homeVM.listarUsuarios(
-                    GetAllUsersUC(
-                        UserRepository(
-                            UserRemoteImpl(db)
-                        )
-                    )
-                )
+        binding.btnAPI.setOnClickListener {
+            lifecycleScope.launch(Dispatchers.Main) {
+                homeVM.getUsersTypi()
             }
         }
     }
 
 
     private fun initObservers() {
+
+        homeVM.typiUsers.observe(viewLifecycleOwner) { items ->
+            items?.forEach { users ->
+                Log.d("ITEMS", users.name)
+            }
+        }
 
         homeVM.userRemote.observe(viewLifecycleOwner) {
             Snackbar.make(
@@ -102,7 +89,7 @@ class HomeFragment : Fragment() {
         }
 
         homeVM.listaUsuarios.observe(viewLifecycleOwner) { users ->
-           Log.d("TAG", "Listando Usuarios")
+            Log.d("TAG", "Listando Usuarios")
             users.forEach {
                 Log.d("TAG", it.toString())
             }
