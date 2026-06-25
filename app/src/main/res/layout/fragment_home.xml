@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#673AB7">
+    android:background="#3A49B7">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -61,6 +61,14 @@
             android:layout_marginTop="20dp"
             android:gravity="center"
             android:text="Recuperar Usuarios" />
+
+        <Button
+            android:id="@+id/btnSubir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="Subir Imagen" />
 
         <TextView
             android:id="@+id/contadorTxt"

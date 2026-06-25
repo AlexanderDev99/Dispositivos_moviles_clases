@@ -72,4 +72,7 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:3.0.0")
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
 
+//CLOUDINARY
+    implementation("com.cloudinary:cloudinary-android:2.4.0")
+
 }
